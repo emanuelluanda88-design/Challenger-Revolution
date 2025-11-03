@@ -1,1 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Challenger Bot Deriv Pro</title>
+  <link rel="stylesheet" href="estilo.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>🤖 Challenger Bot Deriv Pro</h1>
+    <span class="badge">App ID: <strong>110191</strong></span>
+  </header>
 
+  <main class="container">
+    <section class="card">
+      <h2>Conexão & Login</h2>
+      <div class="grid">
+        <label>
+          <span>App ID</span>
+          <input id="appId" value="110191" />
+        </label>
+        <label>
+          <span>Token (opcional se usar OAuth)</span>
+          <input id="token" placeholder="cole seu token (demo ou real)" />
+        </label>
+      </div>
+      <div class="row">
+        <button id="btnAuthorize">Authorize (token)</button>
+        <button id="btnOAuth">Login com Deriv (OAuth)</button>
+        <span id="authInfo" class="muted"></span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Mercado</h2>
+      <div class="row">
+        <select id="symbol"></select>
+        <button id="btnTicks">Assinar Ticks</button>
+        <span id="lastTick" class="muted">—</span>
+      </div>
+      <div id="sparkline"></div>
+    </section>
+
+    <section class="card">
+      <h2>IA & Indicadores</h2>
+      <div class="grid">
+        <label><input type="checkbox" id="chkEMA" checked /> EMA 9/21</label>
+        <label><input type="checkbox" id="chkRSI" checked /> RSI 14</label>
+        <label><input type="checkbox" id="chkMACD" checked /> MACD 12/26/9</label>
+        <label><input type="checkbox" id="chkBB" /> Bollinger 20,2</label>
+      </div>
+      <div class="grid">
+        <label>
+          <span>Confiança mínima IA</span>
+          <input id="minConf" type="number" step="0.1" value="2.5" />
+        </label>
+        <label>
+          <span>Stake ($)</span>
+          <input id="stake" type="number" value="5" />
+        </label>
+        <label>
+          <span>Duração</span>
+          <input id="duration" type="number" value="1" />
+        </label>
+        <label>
+          <span>Unidade</span>
+          <select id="durationUnit">
+            <option value="m">min</option>
+            <option value="t">ticks</option>
+            <option value="s">seg</option>
+          </select>
+        </label>
+      </div>
+      <div class="grid">
+        <label>
+          <span>Multiplier (p/ MULTUP/DOWN)</span>
+          <select id="multiplier">
+            <option>50</option><option selected>100</option><option>200</option><option>300</option>
+          </select>
+        </label>
+        <label>
+          <span>Stop Loss ($)</span>
+          <input id="sl" type="number" value="8" />
+        </label>
+        <label>
+          <span>Take Profit ($)</span>
+          <input id="tp" type="number" value="8" />
+        </label>
+        <label>
+          <span>Modo IA</span>
+          <select id="aiMode">
+            <option value="reactive">Reativa (curto prazo)</option>
+            <option value="hybrid" selected>Híbrida (técnica + momentum)</option>
+          </select>
+        </label>
+      </div>
+      <div class="row">
+        <label><input type="checkbox" id="autoTrade" /> Ativar AutoTrade</label>
+        <span id="aiStatus" class="muted">IA: aguardando dados…</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Opções & Multipliers</h2>
+      <div class="grid">
+        <button id="btnProposalOpt">Proposta CALL/PUT</button>
+        <button id="btnBuyOpt">Comprar Opção</button>
+        <button id="btnProposalMult">Proposta Multiplier</button>
+        <button id="btnBuyMult">Comprar Multiplier</button>
+      </div>
+      <div id="proposalBox" class="muted">Sem proposta ainda…</div>
+    </section>
+
+    <section class="card">
+      <h2>Gestão de Risco</h2>
+      <div class="grid">
+        <label><span>Perda diária máx ($)</span><input id="dailyLoss" type="number" value="50" /></label>
+        <label><span>Perdas consecutivas máx</span><input id="maxSeq" type="number" value="3" /></label>
+      </div>
+      <div id="riskInfo" class="muted">Risco OK</div>
+    </section>
+
+    <section class="card">
+      <h2>Histórico da Sessão</h2>
+      <div class="tableWrap">
+        <table id="tbl" class="table">
+          <thead>
+            <tr><th>Hora</th><th>Símbolo</th><th>Tipo</th><th>Buy</th><th>Sell</th><th>PNL</th><th>ID</th></tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">© Challenger Revolution — use conta DEMO para testes primeiro.</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
