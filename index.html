@@ -1,26 +1,55 @@
-<!-- 🧠 CHALLENGER BOT DERIV REVOLUTION -->
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Challenger Bot Deriv Revolution</title>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Challenger Bot Deriv Pro</title>
 
-<!-- Ícones -->
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/icon.png" />
-<link rel="manifest" href="/manifest.json" />
+  <!-- Estilo principal -->
+  <link rel="stylesheet" href="estilo.css" />
 
-<!-- Cor do tema para dispositivos móveis -->
-<meta name="theme-color" content="#000000" />
+  <!-- Ícone do site (favicon) -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="shortcut icon" href="favicon.ico" />
+</head>
 
-<!-- Meta descrição -->
-<meta name="description" content="Challenger Bot Deriv Revolution — Plataforma inteligente de trading automático com IA e indicadores técnicos." />
+<body>
+  <header class="topbar">
+    <h1>🤖 Challenger Bot Deriv Pro</h1>
+    <span class="badge">App ID: <strong>110191</strong></span>
+  </header>
 
-<!-- Estilo principal -->
-<link rel="stylesheet" href="estilo.css" />
+  <main class="container">
+    <section class="card">
+      <h2>Conexão & Login</h2>
+      <div class="grid">
+        <label>
+          <span>App ID</span>
+          <input id="appId" type="text" value="110191" />
+        </label>
+        <label>
+          <span>Token (opcional se usar OAuth)</span>
+          <input id="token" type="password" placeholder="Cole aqui seu token..." />
+        </label>
+      </div>
 
-<!-- Logotipo (para SEO e redes sociais) -->
-<meta property="og:image" content="/logo.png" />
-<meta property="og:title" content="Challenger Bot Deriv Revolution" />
-<meta property="og:description" content="Automatize suas operações na Deriv com inteligência artificial e indicadores técnicos." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://challenger-revolution.vercel.app" />
+      <button id="connectBtn">Conectar à Deriv</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Challenger Revolution — Todos os direitos reservados</p>
+  </footer>
+
+  <script>
+    // URL de autenticação Deriv (OAuth)
+    const connectBtn = document.getElementById("connectBtn");
+    connectBtn.addEventListener("click", () => {
+      const appId = document.getElementById("appId").value;
+      const redirect = encodeURIComponent(window.location.origin + "/callback");
+      const url = `https://oauth.deriv.com/oauth2/authorize?app_id=${appId}&l=EN&redirect_uri=${redirect}`;
+      window.location.href = url;
+    });
+  </script>
+</body>
+</html>
